@@ -47,24 +47,26 @@
         step  : function (firstUl, cloneUl) {
             var marginLFirstUl=(parseInt($("#"+firstUl).css('marginLeft'))),
                 marginLCloneUl=(parseInt($("#"+cloneUl).css('marginLeft')));
-            if((-marginLFirstUl<=$("#"+firstUl).width())&&(-marginLFirstUl<=$("#"+firstUl).width())){
-                $("#"+firstUl).css({
-                    marginLeft:  (marginLFirstUl-1)+'px'
-                });
-            } else {
-                $("#"+firstUl).css({
-                    marginLeft:  tempDistance+10
-                });
-            }
-            if((-marginLCloneUl<=$("#"+cloneUl).width())){
-                $("#"+cloneUl).css({
-                    marginLeft:  (marginLCloneUl-1)+'px'
-                });
-            } else {
-                $("#"+cloneUl).css({
-                    marginLeft:  tempDistance+10
-                });
-            }
+            
+                if((-marginLFirstUl<=$("#"+firstUl).width())){
+                    $("#"+firstUl).css({
+                        marginLeft:  (marginLFirstUl-1)+'px'
+                    });
+                } else {
+                    $("#"+firstUl).css({
+                        marginLeft:  tempDistance+10
+                    });
+                }
+                if((-marginLCloneUl<=$("#"+cloneUl).width())){
+                    $("#"+cloneUl).css({
+                        marginLeft:  (marginLCloneUl-1)+'px'
+                    });
+                } else {
+                    $("#"+cloneUl).css({
+                        marginLeft:  tempDistance+10
+                    });
+                }
+
         },
         play :function () {
             Ticker.feedId = setInterval(function() {
@@ -73,6 +75,14 @@
         },
         pause: function () {
             clearInterval(Ticker.feedId);
+        },
+        leftMove: function () {
+            $(leftBtn).on('click', function () {
+            });
+        },
+        rightMove: function () {
+            $(rightBtn).on('click', function () {
+            });
         }
     };
     $(parent).on('mouseover', function () {
@@ -83,6 +93,8 @@
     });
     Ticker.init();
     Ticker.play();
+    Ticker.leftMove();
+    Ticker.rightMove();
     return Ticker;
 };
 var ticker1 = feedTicker ( '.wrap-feed', '#feed', '#feed-clone', 40, 350, 0, '.left-btn', '.right-btn' );
