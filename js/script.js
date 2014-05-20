@@ -1,4 +1,4 @@
-﻿function feedTicker ( parent, elem, elemClone, marginLI, marginUL, tempDistance ) {
+﻿function feedTicker ( parent, elem, elemClone, marginLI, marginUL, tempDistance, leftBtn, rightBtn ) {
     if (!elem || !parent) return false;
     $(elemClone).html($(elem).html());
 
@@ -9,6 +9,8 @@
             parent       :    parent,
             elem         :    elem,
             elemClone    :    elemClone,
+            leftBtn      :    leftBtn,
+            rightBtn     :    rightBtn,
             marginLI     :    40  ||   marginLI,
             marginUL     :    350 ||   marginUL,
             tempDistance :    0   ||   tempDistance,
@@ -83,4 +85,4 @@
     Ticker.play();
     return Ticker;
 };
-var ticker1 = feedTicker ( '.wrap-feed', '#feed', '#feed-clone', 40, 350, 0 );
+var ticker1 = feedTicker ( '.wrap-feed', '#feed', '#feed-clone', 40, 350, 0, '.left-btn', '.right-btn' );
