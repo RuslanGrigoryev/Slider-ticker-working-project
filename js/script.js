@@ -1,4 +1,4 @@
-﻿function feedTicker ( parent, elem, marginLI, marginUL, tempDistance, leftBtn, rightBtn ) {
+﻿function feedTicker ( parent, elem, marginLI, marginUL, tempDistance, leftBtn, rightBtn, temp ) {
     if (!elem || !parent) return false;
  
     var Ticker = {
@@ -8,16 +8,14 @@
             elem               :    elem,
             leftBtn            :    leftBtn,
             rightBtn           :    rightBtn,
-            marginLI           :    40  ||   marginLI,
-            marginUL           :    50 ||   marginUL,
-            tempDistance       :    0   ||   tempDistance,
+            marginLI           :    40   ||   marginLI,
+            marginUL           :    50   ||   marginUL,
+            tempDistance       :    0    ||   tempDistance,
             intervalMs         :    20,
+            temp               :    temp || 3,
             currentDirection   :    false/*left*/
         },
         init  : function () {
-
-
-
 
             $(elem).find('li').each(function(){
                 var offset    = $(this).offset(),
@@ -39,36 +37,20 @@
             var marginLFirstUl=(parseInt($("#"+firstUl).css('marginLeft')));
 
                 currentDirection = false;
-                console.log(currentDirection);
-                console.log('Left FIre');
                 
-                if((-marginLFirstUl<=$("#"+firstUl).width())){
-                    $("#"+firstUl).css({
-                        marginLeft:  (marginLFirstUl-1)+'px'
-                    });
-                } else {
-                    $("#"+firstUl).css({
-                        marginLeft:  tempDistance+10
-                    });
-                }
+                $("#"+firstUl).css({
+                    marginLeft:  (marginLFirstUl - temp)+'px'
+                });
 
         },
         stepRight : function (firstUl) {
             var marginLFirstUl=(parseInt($("#"+firstUl).css('marginLeft')));
 
                 currentDirection = true;
-                console.log(currentDirection);
-                console.log('Right FIre');
 
-                if((-marginLFirstUl<=$("#"+firstUl).width())){
-                    $("#"+firstUl).css({
-                        marginLeft:  (marginLFirstUl+1)+'px'
-                    });
-                } else {
-                    $("#"+firstUl).css({
-                        marginLeft:  tempDistance-10
-                    });
-                }
+                $("#"+firstUl).css({
+                    marginLeft:  (marginLFirstUl + temp)+'px'
+                });
         },
         playLeft :function () {
             Ticker.feedId = setInterval(function() {
@@ -108,4 +90,4 @@
     Ticker.rightMove();
     return Ticker;
 };
-var ticker1 = feedTicker ( '.wrap-feed', '#feed', 40, 50, 0, '.left-btn', '.right-btn' );
+var ticker1 = feedTicker ( '.wrap-feed', '#feed', 40, 50, 0, '.left-btn', '.right-btn', 3 );
