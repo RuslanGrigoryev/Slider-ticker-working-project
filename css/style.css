@@ -2,12 +2,13 @@
 	border-bottom: 1px dashed #000;
 	overflow: hidden;
 	position: relative;
-	height: 60px;
+	height: 270px;
 }
 .feed-news:hover .feed-news-title {
 	text-decoration: none;
 }
 .feed-news {
+    list-style: none;
     float: left;
     margin: 0 20px 0 10px;
     padding: 20px 0;
@@ -19,6 +20,7 @@
 	position: relative;
 	display:block;
 	width:5000px;
+    cursor:pointer;
 }
 .feed-news-has-video {
     background: #373737;
