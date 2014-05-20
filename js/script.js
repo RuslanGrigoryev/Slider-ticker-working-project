@@ -1,6 +1,8 @@
 ﻿function feedTicker ( parent, elem, marginLI, marginUL, tempDistance, leftBtn, rightBtn, temp ) {
     if (!elem || !parent) return false;
- 
+    var POSITION  = null;
+    $('#feed-left').html($(elem).html());
+    $('#feed-clone').html($(elem).html());
     var Ticker = {
         feedId : null,
         opts   :  {
@@ -18,39 +20,106 @@
         init  : function () {
 
             $(elem).find('li').each(function(){
-                var offset    = $(this).offset(),
-                    offsetLeft= offset.left;
-
-                $(this).css({
-                    left:offsetLeft+tempDistance
-                });
-
                 tempDistance = $(this).width()+tempDistance+marginLI;
             });
             $(elem).css({
                 width:tempDistance+marginUL,
-                marginLeft: marginLI
+                left: 0 + 'px'
             });
-            tempDistance = 0;
+
+            $('#feed-left').css({
+                width: $(elem).width() + 'px',
+                left : -$(elem).width()
+            });
+            $('#feed-clone').css({
+                width: $(elem).width() + 'px',
+                left : $(elem).width()
+            });
+            POSITION = $(elem).width()*2;
+
         },
         stepLeft  : function (firstUl) {
-            var marginLFirstUl=(parseInt($("#"+firstUl).css('marginLeft')));
-
-                currentDirection = false;
+            var LeftFirstUl   = (parseInt( $("#"+firstUl).css('left')) ),
+                leftFeedClone = (parseInt( $('#feed-clone').css('left')) ),
+                leftFeedLeft  = (parseInt( $('#feed-left').css('left')) );
                 
+                currentDirection = false;
                 $("#"+firstUl).css({
-                    marginLeft:  (marginLFirstUl - temp)+'px'
+                    left:  (LeftFirstUl - temp)+'px'
                 });
+                $('#feed-clone').css({
+                    left: (leftFeedClone - temp) + 'px'
+                });
+                $('#feed-left').css({
+                    left: (leftFeedLeft - temp) + 'px'
+                });
+
+                if ( LeftFirstUl <= -($(elem).width()) ) {
+                    POSITION-=temp;
+                    $('#feed').css({
+                        left: (POSITION) + 'px'
+                    });
+                }
+                if ( leftFeedClone <= -($(elem).width()) ) {
+                    POSITION-=temp;
+                    $('#feed-clone').css({
+                        left: (POSITION) + 'px'
+                    });
+                }
+                if ( leftFeedLeft <= -($(elem).width()) ) {
+                    POSITION-=temp;
+                    $('#feed-left').css({
+                        left: (POSITION) + 'px'
+                    });
+                }
+                  
+                
+                
+
 
         },
         stepRight : function (firstUl) {
-            var marginLFirstUl=(parseInt($("#"+firstUl).css('marginLeft')));
+            var LeftFirstUl   = (parseInt($("#"+firstUl).css('left'))),
+                leftFeedClone = (parseInt( $('#feed-clone').css('left')) ),
+                leftFeedLeft  = (parseInt( $('#feed-left').css('left')) );
 
+                console.log(POSITION);
+                console.log('LeftFirstUl '+LeftFirstUl);
+                console.log('leftFeedClone '+leftFeedClone);
+                console.log('leftFeedLeft '+leftFeedLeft);
                 currentDirection = true;
 
-                $("#"+firstUl).css({
-                    marginLeft:  (marginLFirstUl + temp)+'px'
+                $( "#"+firstUl ).css({
+                    left:  ( LeftFirstUl + temp) +'px'
                 });
+                
+                $('#feed-left').css({
+                    left: ( leftFeedLeft + temp) + 'px'
+                });
+
+                $('#feed-clone').css({
+                    left: ( leftFeedClone + temp) + 'px'
+                });
+
+                if ( LeftFirstUl >= ($(elem).width()) ) {
+                    POSITION+=temp;
+                    $('#feed').css({
+                        left: -(POSITION) + 'px'
+                    });
+                }
+                if ( leftFeedClone >= ($(elem).width()) ) {
+                    POSITION+=temp;
+                    $('#feed-clone').css({
+                        left: -(POSITION) + 'px'
+                    });
+                }
+                if ( leftFeedLeft >= ($(elem).width()) ) {
+                    POSITION+=temp;
+                    $('#feed-left').css({
+                        left: -(POSITION) + 'px'
+                    });
+                }
+               
         },
         playLeft :function () {
             Ticker.feedId = setInterval(function() {
@@ -90,4 +159,4 @@
     Ticker.rightMove();
     return Ticker;
 };
-var ticker1 = feedTicker ( '.wrap-feed', '#feed', 40, 50, 0, '.left-btn', '.right-btn', 3 );
+var ticker1 = feedTicker ( '.wrap-feed', '#feed', 40, 50, 0, '.left-btn', '.right-btn', 10 );
