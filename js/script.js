@@ -1,30 +1,32 @@
-﻿function feedTicker ( parent, elem, elemClone, marginLI, marginUL, tempDistance, leftBtn, rightBtn ) {
+﻿function feedTicker ( parent, elem, marginLI, marginUL, tempDistance, leftBtn, rightBtn ) {
     if (!elem || !parent) return false;
-    $(elemClone).html($(elem).html());
-
  
     var Ticker = {
         feedId : null,
         opts   :  {
             parent             :    parent,
             elem               :    elem,
-            elemClone          :    elemClone,
             leftBtn            :    leftBtn,
             rightBtn           :    rightBtn,
             marginLI           :    40  ||   marginLI,
-            marginUL           :    350 ||   marginUL,
+            marginUL           :    50 ||   marginUL,
             tempDistance       :    0   ||   tempDistance,
             intervalMs         :    20,
             currentDirection   :    false/*left*/
         },
         init  : function () {
 
+
+
+
             $(elem).find('li').each(function(){
-                var offset=$(this).offset(),
-                    offsetLeft=offset.left;
+                var offset    = $(this).offset(),
+                    offsetLeft= offset.left;
+
                 $(this).css({
                     left:offsetLeft+tempDistance
                 });
+
                 tempDistance = $(this).width()+tempDistance+marginLI;
             });
             $(elem).css({
@@ -32,22 +34,9 @@
                 marginLeft: marginLI
             });
             tempDistance = 0;
-            $(elemClone).find('li').each(function(){
-                var offset=$(this).offset();
-                offsetLeft=offset.left;
-                $(this).css({
-                    left:offsetLeft+tempDistance
-                });
-                tempDistance=$(this).width()+tempDistance+marginLI;
-            });
-            $(elemClone).css({
-                width:tempDistance+marginUL,
-                marginLeft:tempDistance+marginLI
-            });
         },
-        stepLeft  : function (firstUl, cloneUl) {
-            var marginLFirstUl=(parseInt($("#"+firstUl).css('marginLeft'))),
-                marginLCloneUl=(parseInt($("#"+cloneUl).css('marginLeft')));
+        stepLeft  : function (firstUl) {
+            var marginLFirstUl=(parseInt($("#"+firstUl).css('marginLeft')));
 
                 currentDirection = false;
                 console.log(currentDirection);
@@ -62,20 +51,10 @@
                         marginLeft:  tempDistance+10
                     });
                 }
-                if((-marginLCloneUl<=$("#"+cloneUl).width())){
-                    $("#"+cloneUl).css({
-                        marginLeft:  (marginLCloneUl-1)+'px'
-                    });
-                } else {
-                    $("#"+cloneUl).css({
-                        marginLeft:  tempDistance+10
-                    });
-                }
 
         },
-        stepRight : function (firstUl, cloneUl) {
-            var marginLFirstUl=(parseInt($("#"+firstUl).css('marginLeft'))),
-                marginLCloneUl=(parseInt($("#"+cloneUl).css('marginLeft')));
+        stepRight : function (firstUl) {
+            var marginLFirstUl=(parseInt($("#"+firstUl).css('marginLeft')));
 
                 currentDirection = true;
                 console.log(currentDirection);
@@ -90,24 +69,15 @@
                         marginLeft:  tempDistance-10
                     });
                 }
-                if((-marginLCloneUl<=$("#"+cloneUl).width())){
-                    $("#"+cloneUl).css({
-                        marginLeft:  (marginLCloneUl+1)+'px'
-                    });
-                } else {
-                    $("#"+cloneUl).css({
-                        marginLeft:  tempDistance-10
-                    });
-                }
         },
         playLeft :function () {
             Ticker.feedId = setInterval(function() {
-                Ticker.stepLeft('feed','feed-clone');
+                Ticker.stepLeft('feed');
             }, Ticker.opts.intervalMs);
         },
         playRight: function () {
             Ticker.feedId = setInterval(function() {
-                Ticker.stepRight('feed','feed-clone');
+                Ticker.stepRight('feed');
             }, Ticker.opts.intervalMs);
         },
         pause: function () {
@@ -138,4 +108,4 @@
     Ticker.rightMove();
     return Ticker;
 };
-var ticker1 = feedTicker ( '.wrap-feed', '#feed', '#feed-clone', 40, 50, 0, '.left-btn', '.right-btn' );
+var ticker1 = feedTicker ( '.wrap-feed', '#feed', 40, 50, 0, '.left-btn', '.right-btn' );
