@@ -14,11 +14,11 @@
             marginLI           :    40  ||   marginLI,
             marginUL           :    350 ||   marginUL,
             tempDistance       :    0   ||   tempDistance,
-            intervalMs         :    20,
+            intervalMs         :    10,
             currentDirection   :    false/*left*/
         },
         init  : function () {
-
+            
             $(elem).find('li').each(function(){
                 var offset=$(this).offset(),
                     offsetLeft=offset.left;
