@@ -2,7 +2,7 @@
     if (!elem || !parent) return false;
     $(elemClone).html($(elem).html());
 
-
+ 
     var Ticker = {
         feedId : null,
         opts   :  {
