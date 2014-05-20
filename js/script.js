@@ -6,15 +6,16 @@
     var Ticker = {
         feedId : null,
         opts   :  {
-            parent       :    parent,
-            elem         :    elem,
-            elemClone    :    elemClone,
-            leftBtn      :    leftBtn,
-            rightBtn     :    rightBtn,
-            marginLI     :    40  ||   marginLI,
-            marginUL     :    350 ||   marginUL,
-            tempDistance :    0   ||   tempDistance,
-            intervalMs   :    20
+            parent             :    parent,
+            elem               :    elem,
+            elemClone          :    elemClone,
+            leftBtn            :    leftBtn,
+            rightBtn           :    rightBtn,
+            marginLI           :    40  ||   marginLI,
+            marginUL           :    350 ||   marginUL,
+            tempDistance       :    0   ||   tempDistance,
+            intervalMs         :    20,
+            currentDirection   :    false/*left*/
         },
         init  : function () {
 
@@ -44,10 +45,14 @@
                 marginLeft:tempDistance+marginLI
             });
         },
-        step  : function (firstUl, cloneUl) {
+        stepLeft  : function (firstUl, cloneUl) {
             var marginLFirstUl=(parseInt($("#"+firstUl).css('marginLeft'))),
                 marginLCloneUl=(parseInt($("#"+cloneUl).css('marginLeft')));
-            
+
+                currentDirection = false;
+                console.log(currentDirection);
+                console.log('Left FIre');
+                
                 if((-marginLFirstUl<=$("#"+firstUl).width())){
                     $("#"+firstUl).css({
                         marginLeft:  (marginLFirstUl-1)+'px'
@@ -68,9 +73,41 @@
                 }
 
         },
-        play :function () {
+        stepRight : function (firstUl, cloneUl) {
+            var marginLFirstUl=(parseInt($("#"+firstUl).css('marginLeft'))),
+                marginLCloneUl=(parseInt($("#"+cloneUl).css('marginLeft')));
+
+                currentDirection = true;
+                console.log(currentDirection);
+                console.log('Right FIre');
+
+                if((-marginLFirstUl<=$("#"+firstUl).width())){
+                    $("#"+firstUl).css({
+                        marginLeft:  (marginLFirstUl+1)+'px'
+                    });
+                } else {
+                    $("#"+firstUl).css({
+                        marginLeft:  tempDistance-10
+                    });
+                }
+                if((-marginLCloneUl<=$("#"+cloneUl).width())){
+                    $("#"+cloneUl).css({
+                        marginLeft:  (marginLCloneUl+1)+'px'
+                    });
+                } else {
+                    $("#"+cloneUl).css({
+                        marginLeft:  tempDistance-10
+                    });
+                }
+        },
+        playLeft :function () {
             Ticker.feedId = setInterval(function() {
-                Ticker.step('feed','feed-clone');
+                Ticker.stepLeft('feed','feed-clone');
+            }, Ticker.opts.intervalMs);
+        },
+        playRight: function () {
+            Ticker.feedId = setInterval(function() {
+                Ticker.stepRight('feed','feed-clone');
             }, Ticker.opts.intervalMs);
         },
         pause: function () {
@@ -78,10 +115,14 @@
         },
         leftMove: function () {
             $(leftBtn).on('click', function () {
+                clearInterval(Ticker.feedId);
+                Ticker.playLeft();
             });
         },
         rightMove: function () {
             $(rightBtn).on('click', function () {
+                clearInterval(Ticker.feedId);
+                Ticker.playRight();
             });
         }
     };
@@ -89,10 +130,10 @@
         Ticker.pause();
     });
     $(parent).on('mouseleave', function () {
-        Ticker.play();
+        currentDirection ? Ticker.playRight() : Ticker.playLeft();
     });
     Ticker.init();
-    Ticker.play();
+    Ticker.playLeft();
     Ticker.leftMove();
     Ticker.rightMove();
     return Ticker;
