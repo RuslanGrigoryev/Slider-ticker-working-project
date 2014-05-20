@@ -1,6 +1,7 @@
-﻿function feedTicker ( parent, elem, marginLI, marginUL, tempDistance, leftBtn, rightBtn, temp ) {
+﻿function feedTicker ( parent, elem, marginLI, tempDistance, leftBtn, rightBtn, temp ) {
     if (!elem || !parent) return false;
-    var POSITION  = null;
+    var POSITION  = null,
+        currentDirection = false;
     $('#feed-left').html($(elem).html());
     $('#feed-clone').html($(elem).html());
     var Ticker = {
@@ -11,11 +12,9 @@
             leftBtn            :    leftBtn,
             rightBtn           :    rightBtn,
             marginLI           :    40   ||   marginLI,
-            marginUL           :    50   ||   marginUL,
             tempDistance       :    0    ||   tempDistance,
             intervalMs         :    20,
-            temp               :    temp || 3,
-            currentDirection   :    false/*left*/
+            temp               :    temp || 3
         },
         init  : function () {
 
@@ -23,19 +22,24 @@
                 tempDistance = $(this).width()+tempDistance+marginLI;
             });
             $(elem).css({
-                width:tempDistance+marginUL,
+                width:tempDistance +100 + 'px',
                 left: 0 + 'px'
             });
 
             $('#feed-left').css({
-                width: $(elem).width() + 'px',
+                width: $(elem).width() +100+ 'px',
                 left : -$(elem).width()
             });
             $('#feed-clone').css({
-                width: $(elem).width() + 'px',
-                left : $(elem).width()
+                width: $(elem).width() +100+ 'px',
+                left : $(elem).width() 
             });
-            POSITION = $(elem).width()*2;
+            if (!currentDirection) {
+                POSITION = $(elem).width()*2;
+            }
+            else {
+                POSITION = $(elem).width();
+            }
 
         },
         stepLeft  : function (firstUl) {
@@ -82,11 +86,6 @@
             var LeftFirstUl   = (parseInt($("#"+firstUl).css('left'))),
                 leftFeedClone = (parseInt( $('#feed-clone').css('left')) ),
                 leftFeedLeft  = (parseInt( $('#feed-left').css('left')) );
-
-                console.log(POSITION);
-                console.log('LeftFirstUl '+LeftFirstUl);
-                console.log('leftFeedClone '+leftFeedClone);
-                console.log('leftFeedLeft '+leftFeedLeft);
                 currentDirection = true;
 
                 $( "#"+firstUl ).css({
@@ -159,4 +158,4 @@
     Ticker.rightMove();
     return Ticker;
 };
-var ticker1 = feedTicker ( '.wrap-feed', '#feed', 40, 50, 0, '.left-btn', '.right-btn', 10 );
+var ticker1 = feedTicker ( '.wrap-feed', '#feed', 50, 0, '.left-btn', '.right-btn', 5 );
