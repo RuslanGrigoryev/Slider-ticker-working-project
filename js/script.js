@@ -14,11 +14,11 @@
             marginLI           :    40  ||   marginLI,
             marginUL           :    350 ||   marginUL,
             tempDistance       :    0   ||   tempDistance,
-            intervalMs         :    10,
+            intervalMs         :    20,
             currentDirection   :    false/*left*/
         },
         init  : function () {
-            
+
             $(elem).find('li').each(function(){
                 var offset=$(this).offset(),
                     offsetLeft=offset.left;
@@ -138,4 +138,4 @@
     Ticker.rightMove();
     return Ticker;
 };
-var ticker1 = feedTicker ( '.wrap-feed', '#feed', '#feed-clone', 40, 350, 0, '.left-btn', '.right-btn' );
+var ticker1 = feedTicker ( '.wrap-feed', '#feed', '#feed-clone', 40, 50, 0, '.left-btn', '.right-btn' );
