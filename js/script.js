@@ -1,4 +1,4 @@
-﻿function feedTicker ( parent, elem, marginLI, tempDistance, leftBtn, rightBtn, temp ) {
+﻿function feedTicker ( parent, elem, marginLI, marginUL, tempDistance, leftBtn, rightBtn, temp ) {
     if (!elem || !parent) return false;
     var POSITION  = null,
         currentDirection = false;
@@ -12,6 +12,7 @@
             leftBtn            :    leftBtn,
             rightBtn           :    rightBtn,
             marginLI           :    40   ||   marginLI,
+            marginUL           :    50   ||   marginUL,
             tempDistance       :    0    ||   tempDistance,
             intervalMs         :    20,
             temp               :    temp || 3
@@ -22,7 +23,7 @@
                 tempDistance = $(this).width()+tempDistance+marginLI;
             });
             $(elem).css({
-                width:tempDistance +100 + 'px',
+                width:tempDistance+marginUL +100 + 'px',
                 left: 0 + 'px'
             });
 
@@ -34,13 +35,8 @@
                 width: $(elem).width() +100+ 'px',
                 left : $(elem).width() 
             });
-            if (!currentDirection) {
-                POSITION = $(elem).width()*2;
-            }
-            else {
-                POSITION = $(elem).width();
-            }
-
+           
+            POSITION = $(elem).width();
         },
         stepLeft  : function (firstUl) {
             var LeftFirstUl   = (parseInt( $("#"+firstUl).css('left')) ),
@@ -83,7 +79,7 @@
 
         },
         stepRight : function (firstUl) {
-            var LeftFirstUl   = (parseInt($("#"+firstUl).css('left'))),
+            var LeftFirstUl   = (parseInt( $("#"+firstUl).css('left'))),
                 leftFeedClone = (parseInt( $('#feed-clone').css('left')) ),
                 leftFeedLeft  = (parseInt( $('#feed-left').css('left')) );
                 currentDirection = true;
@@ -158,4 +154,4 @@
     Ticker.rightMove();
     return Ticker;
 };
-var ticker1 = feedTicker ( '.wrap-feed', '#feed', 50, 0, '.left-btn', '.right-btn', 5 );
+var ticker1 = feedTicker ( '.wrap-feed', '#feed', 40, 50, 0, '.left-btn', '.right-btn', 5 );
