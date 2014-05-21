@@ -22,6 +22,7 @@
             $(elem).find('li').each(function(){
                 tempDistance = $(this).width()+tempDistance+marginLI;
             });
+            
             $(elem).css({
                 width:tempDistance+marginUL +30 + 'px',
                 left: 0 + 'px'
