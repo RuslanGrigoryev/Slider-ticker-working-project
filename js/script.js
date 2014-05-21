@@ -58,18 +58,18 @@
                 if ( LeftFirstUl <= -($(elem).width()) ) {
                     POSITION -= temp;
                     $('#feed').css({
-                        left: (POSITION) + 'px'
+                        left: (POSITION*2) + 'px'
                     });
                 }
                 /*если последний блок находится левее , чем -2112, то переставляем его на место справа*/
                 if ( leftFeedClone <= -($(elem).width()) ) {
                     POSITION -= temp;
                     $('#feed-clone').css({
-                        left: (POSITION) + 'px'
+                        left: (POSITION*2) + 'px'
                     });
                 }
                 /*если первый блок (который слева) и его левая точка уходит за ширину, то переставляем его вправо*/
-                if ( leftFeedLeft < -($(elem).width()*2) ) {
+                if ( leftFeedLeft < -($(elem).width()) ) {
                     POSITION -= temp;
                     $('#feed-left').css({
                         left: (POSITION*2) + 'px'
