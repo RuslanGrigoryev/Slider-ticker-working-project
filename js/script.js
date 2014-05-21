@@ -23,16 +23,16 @@
                 tempDistance = $(this).width()+tempDistance+marginLI;
             });
             $(elem).css({
-                width:tempDistance+marginUL +100 + 'px',
+                width:tempDistance+marginUL +30 + 'px',
                 left: 0 + 'px'
             });
 
             $('#feed-left').css({
-                width: $(elem).width() +100+ 'px',
+                width: $(elem).width() + 'px',
                 left : -$(elem).width()
             });
             $('#feed-clone').css({
-                width: $(elem).width() +100+ 'px',
+                width: $(elem).width() + 'px',
                 left : $(elem).width() 
             });
            
@@ -54,28 +54,27 @@
                     left: (leftFeedLeft - temp) + 'px'
                 });
 
+                /*если центральный блок находится левее своей ширины ( < -2122 ) то переставляем его на место справа*/
                 if ( LeftFirstUl <= -($(elem).width()) ) {
-                    POSITION-=temp;
+                    POSITION -= temp;
                     $('#feed').css({
                         left: (POSITION) + 'px'
                     });
                 }
+                /*если последний блок находится левее , чем -2112, то переставляем его на место справа*/
                 if ( leftFeedClone <= -($(elem).width()) ) {
-                    POSITION-=temp;
+                    POSITION -= temp;
                     $('#feed-clone').css({
                         left: (POSITION) + 'px'
                     });
                 }
-                if ( leftFeedLeft <= -($(elem).width()) ) {
-                    POSITION-=temp;
+                /*если первый блок (который слева) и его левая точка уходит за ширину, то переставляем его вправо*/
+                if ( leftFeedLeft < -($(elem).width()*2) ) {
+                    POSITION -= temp;
                     $('#feed-left').css({
-                        left: (POSITION) + 'px'
+                        left: (POSITION*2) + 'px'
                     });
                 }
-                  
-                
-                
-
 
         },
         stepRight : function (firstUl) {
@@ -154,4 +153,4 @@
     Ticker.rightMove();
     return Ticker;
 };
-var ticker1 = feedTicker ( '.wrap-feed', '#feed', 40, 50, 0, '.left-btn', '.right-btn', 5 );
+var ticker1 = feedTicker ( '.wrap-feed', '#feed', 40, 50, 0, '.left-btn', '.right-btn', 3 );
