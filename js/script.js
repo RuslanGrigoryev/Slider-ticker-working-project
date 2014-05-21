@@ -96,22 +96,24 @@
                 });
 
                 /*если центральный блок уходит за правую часть*/
-                if ( LeftFirstUl >= ($(elem).width()) ) {
-                    POSITION+=temp;
+                if ( LeftFirstUl >= ($(elem).width()*2) ) {
+                    POSITION -= temp;
                     $('#feed').css({
-                        left: -(POSITION)*2 + 'px'
+                        left: -(POSITION) + 'px'
                     });
                 }
-                if ( leftFeedClone >= ($(elem).width()) ) {
-                    POSITION+=temp;
+                /*если последний блок находится левее , чем -2112, то переставляем его на место справа*/
+                if ( leftFeedClone >= ($(elem).width()*2) ) {
+                    POSITION -= temp;
                     $('#feed-clone').css({
-                        left: -(POSITION)*2 + 'px'
+                        left: -(POSITION) + 'px'
                     });
                 }
-                if ( leftFeedLeft >= ($(elem).width()) ) {
-                    POSITION+=temp;
+                /*если первый блок (который слева) и его левая точка уходит за ширину, то переставляем его вправо*/
+                if ( leftFeedLeft >= ($(elem).width()*2) ) {
+                    POSITION -= temp;
                     $('#feed-left').css({
-                        left: -(POSITION)*2 + 'px'
+                        left: -(POSITION) + 'px'
                     });
                 }
                
