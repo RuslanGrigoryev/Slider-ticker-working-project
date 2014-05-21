@@ -95,22 +95,23 @@
                     left: ( leftFeedClone + temp) + 'px'
                 });
 
+                /*если центральный блок уходит за правую часть*/
                 if ( LeftFirstUl >= ($(elem).width()) ) {
                     POSITION+=temp;
                     $('#feed').css({
-                        left: -(POSITION) + 'px'
+                        left: -(POSITION)*2 + 'px'
                     });
                 }
                 if ( leftFeedClone >= ($(elem).width()) ) {
                     POSITION+=temp;
                     $('#feed-clone').css({
-                        left: -(POSITION) + 'px'
+                        left: -(POSITION)*2 + 'px'
                     });
                 }
                 if ( leftFeedLeft >= ($(elem).width()) ) {
                     POSITION+=temp;
                     $('#feed-left').css({
-                        left: -(POSITION) + 'px'
+                        left: -(POSITION)*2 + 'px'
                     });
                 }
                
