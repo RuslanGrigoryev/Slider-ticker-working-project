@@ -77,7 +77,7 @@
                 }
                 console.log(LeftFirstUl);
                 console.log(leftFeedClone);
-                console.log(LeftFirstUl);
+                console.log(leftFeedLeft);
 
         },
         stepRight : function (firstUl) {
@@ -159,4 +159,4 @@
     Ticker.rightMove();
     return Ticker;
 };
-var ticker1 = feedTicker ( '.wrap-feed', '#feed', 0, '.left-btn', '.right-btn', 10 );
+var ticker1 = feedTicker ( '.wrap-feed', '#feed', 0, '.left-btn', '.right-btn', 100 );

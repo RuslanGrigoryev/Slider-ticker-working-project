@@ -19,6 +19,9 @@
     margin: 0 20px;
     padding: 20px 0;
 }
+.feed-news a {
+    display: block;
+}
 .header-bottom-feed {
 	position: absolute;
 	display:block;
