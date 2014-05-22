@@ -151,4 +151,4 @@
     Ticker.rightMove();
     return Ticker;
 };
-var ticker1 = feedTicker ( '.wrap-feed', '#feed', 0, '.left-btn', '.right-btn', 5 );
+var ticker1 = feedTicker ( '.wrap-feed', '#feed', 0, '.left-btn', '.right-btn', 1 );
