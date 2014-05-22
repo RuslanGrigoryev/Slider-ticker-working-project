@@ -22,6 +22,7 @@
 .header-bottom-feed {
 	position: absolute;
 	display:block;
+    padding: 0;
 	width:5000px;
     cursor:pointer;
 }

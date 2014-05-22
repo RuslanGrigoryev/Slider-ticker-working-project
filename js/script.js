@@ -36,7 +36,7 @@
                 left : $(elem).width() 
             });
            
-            POSITION = $(elem).width();
+            POSITION = $(elem).width()+10;
         },
         stepLeft  : function (firstUl) {
             var LeftFirstUl   = (parseInt( $("#"+firstUl).css('left')) ),
@@ -58,23 +58,26 @@
                 if ( LeftFirstUl < -($(elem).width()) ) {
                     POSITION -= temp ;
                     $('#feed').css({
-                        left: (POSITION*2+10) + 'px'
+                        left: (POSITION*2) + 'px'
                     });
                 }
                 /*если последний блок находится левее , чем -2112, то переставляем его на место справа*/
                 if ( leftFeedClone < -($(elem).width()) ) {
                     POSITION -= temp ;
                     $('#feed-clone').css({
-                        left: (POSITION*2+10) + 'px'
+                        left: (POSITION*2) + 'px'
                     });
                 }
                 /*если первый блок (который слева) и его левая точка уходит за ширину, то переставляем его вправо*/
                 if ( leftFeedLeft < -($(elem).width()) ) {
                     POSITION -= temp ;
                     $('#feed-left').css({
-                        left: (POSITION*2+10) + 'px'
+                        left: (POSITION*2) + 'px'
                     });
                 }
+                console.log(LeftFirstUl);
+                console.log(leftFeedClone);
+                console.log(LeftFirstUl);
 
         },
         stepRight : function (firstUl) {
@@ -99,21 +102,21 @@
                 if ( LeftFirstUl > ($(elem).width()*2) ) {
                     POSITION -= temp;
                     $('#feed').css({
-                        left: -(POSITION-10) + 'px'
+                        left: -(POSITION) + 'px'
                     });
                 }
                 /*если последний блок находится левее , чем -2112, то переставляем его на место справа*/
                 if ( leftFeedClone > ($(elem).width()*2) ) {
                     POSITION -= temp;
                     $('#feed-clone').css({
-                        left: -(POSITION-10) + 'px'
+                        left: -(POSITION) + 'px'
                     });
                 }
                 /*если первый блок (который слева) и его левая точка уходит за ширину, то переставляем его вправо*/
                 if ( leftFeedLeft > ($(elem).width()*2) ) {
                     POSITION -= temp;
                     $('#feed-left').css({
-                        left: -(POSITION-10) + 'px'
+                        left: -(POSITION) + 'px'
                     });
                 }
                
@@ -156,4 +159,4 @@
     Ticker.rightMove();
     return Ticker;
 };
-var ticker1 = feedTicker ( '.wrap-feed', '#feed', 0, '.left-btn', '.right-btn', 1 );
+var ticker1 = feedTicker ( '.wrap-feed', '#feed', 0, '.left-btn', '.right-btn', 10 );
