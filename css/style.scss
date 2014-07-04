@@ -1,8 +1,11 @@
-﻿.wrap-feed {
+﻿body {
+    background: #cff;
+}
+.wrap-feed {
 	overflow: hidden;
 	position: relative;
-	height: 270px;
-    width: 90%;
+	height: 210px;
+    width: 50%;
     margin: 0 auto;
 }
 .wrap-arrows {
@@ -17,7 +20,7 @@
     list-style: none;
     float: left;
     margin: 0 20px;
-    padding: 20px 0;
+    padding: 21px 0;
 }
 .feed-news a {
     display: block;
@@ -26,7 +29,7 @@
 	position: absolute;
 	display:block;
     padding: 0;
-	width:5000px;
+	width:5002px;
     cursor:pointer;
 }
 .feed-news-has-video {

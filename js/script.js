@@ -1,6 +1,6 @@
 ﻿function feedTicker ( parent, elem, tempDistance, leftBtn, rightBtn, temp ) {
     if (!elem || !parent) return false;
-    var POSITION  = null,
+    var POSITION  = null, 
         currentDirection = false;
     $('#feed-left').html($(elem).html());
     $('#feed-clone').html($(elem).html());
@@ -12,13 +12,12 @@
             leftBtn            :    leftBtn,
             rightBtn           :    rightBtn,
             tempDistance       :    0    ||   tempDistance,
-            intervalMs         :    30,
+            intervalMs         :    50,
             temp               :    temp || 1
         },
         init  : function () {
 
             $.each($(elem).find('li'), function(){
-                //40  2x20 margin
                 tempDistance = $(this).width()+40+tempDistance;
             });
 
@@ -72,8 +71,6 @@
                         left: (POSITION*2 - temp) + 'px'
                     });
                 }
-                
- 
         },
         stepRight : function (firstUl) {
             var LeftFirstUl   = (parseInt( $("#"+firstUl).css('left'))),
